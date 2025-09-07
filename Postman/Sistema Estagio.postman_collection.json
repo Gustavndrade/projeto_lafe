@@ -1,0 +1,2268 @@
+{
+	"info": {
+		"_postman_id": "9c1174c8-153f-4abd-afed-901ef4e2f730",
+		"name": "Sistema Estagio",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39965580"
+	},
+	"item": [
+		{
+			"name": "RelatorioEstagio",
+			"item": [
+				{
+					"name": "Listar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/relatorioEstagio",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"relatorioEstagio"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Por Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/relatorioEstagio/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"relatorioEstagio",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Por Estagio",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/relatorioEstagio/estagio/:estagioId",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"relatorioEstagio",
+								"estagio",
+								":estagioId"
+							],
+							"variable": [
+								{
+									"key": "estagioId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"estagioId\": 1,\n    \"tipo\": \"Inicial\",\n    \"prazoEntrega\": \"2025-12-31T00:00:00.000Z\",\n    \"observacao\": \"Relatório inicial do estágio\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/relatorioEstagio",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"relatorioEstagio"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"estagioId\": 1,\n    \"tipo\": \"Inicial\",\n    \"prazoEntrega\": \"2025-12-31T00:00:00.000Z\",\n    \"dataEntregue\": \"2025-12-15T00:00:00.000Z\",\n    \"observacao\": \"Relatório inicial do estágio - Atualizado e entregue\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/relatorioEstagio/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"relatorioEstagio",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/relatorioEstagio/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"relatorioEstagio",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "EstagioHorario",
+			"item": [
+				{
+					"name": "Listar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/estagioHorario",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"estagioHorario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Por Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/estagioHorario/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"estagioHorario",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"estagioId\": 1,\n    \"diaSemana\": \"Segunda\",\n    \"horarioInicio\": \"2024-01-01T08:00:00.000Z\",\n    \"horarioFim\": \"2024-01-01T12:00:00.000Z\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/estagioHorario",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"estagioHorario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alterar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"estagioId\": 1,\n    \"diaSemana\": \"Segunda\",\n    \"horarioInicio\": \"2024-01-01T09:00:00.000Z\",\n    \"horarioFim\": \"2024-01-01T13:00:00.000Z\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/estagioHorario/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"estagioHorario",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/estagioHorario/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"estagioHorario",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cidade",
+			"item": [
+				{
+					"name": "Listar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/cidade",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"cidade"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Por Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/cidade/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"cidade",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Por Nome",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/cidade/buscar-por-nome/:nome",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"cidade",
+								"buscar-por-nome",
+								":nome"
+							],
+							"variable": [
+								{
+									"key": "nome",
+									"value": "{{nome}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Por Uf",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/cidade/buscar-por-uf/:uf",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"cidade",
+								"buscar-por-uf",
+								":uf"
+							],
+							"variable": [
+								{
+									"key": "uf",
+									"value": "{{uf}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\":\"São Paulo\",\r\n    \"uf\":\"SPs\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/cidade",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"cidade"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alterar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\":\"São Paulo\",\r\n    \"uf\":\"MG\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/cidade/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"cidade",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\":\"São Paulo\",\r\n    \"uf\":\"SP\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/cidade/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"cidade",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Seguradora",
+			"item": [
+				{
+					"name": "Listar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/seguradora",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"seguradora"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Por Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/seguradora/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"seguradora",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\":\"Atualizada Seguros\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/seguradora",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"seguradora"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alterar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\":\"Pé Seguros\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/seguradora/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"seguradora",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/seguradora/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"seguradora",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Instituicao",
+			"item": [
+				{
+					"name": "Listar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/instituicao",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"instituicao"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Por Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/instituicao/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"instituicao",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Instituto Federal\",\n    \"nomeFantasia\": \"IFSP\",\n    \"cidadeId\": 1,\n    \"cnpj\": \"12.345.678/0001-99\",\n    \"endereco\": \"Rua Exemplo, 123\",\n    \"telefone\": \"(11) 1234-5678\",\n    \"email\": \"contato@ifsp.edu.br\",\n    \"nomeDiretor\": \"João da Silva\",\n    \"cpfDiretor\": \"123.456.789-00\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/instituicao",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"instituicao"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alterar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Instituto Federal Atualizado\",\n    \"nomeFantasia\": \"IFSP Atualizado\",\n    \"cidadeId\": 1,\n    \"cnpj\": \"12.345.678/0001-99\",\n    \"endereco\": \"Rua Nova, 456\",\n    \"telefone\": \"(11) 9876-5432\",\n    \"email\": \"novo@ifsp.edu.br\",\n    \"nomeDiretor\": \"Maria Oliveira\",\n    \"cpfDiretor\": \"987.654.321-00\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/instituicao/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"instituicao",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/instituicao/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"instituicao",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "USUARIO",
+			"item": [
+				{
+					"name": "Criar Usuario",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"admin\",\n    \"email\": \"admin@gmail.com\",\n    \"senha\":\"123456\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/usuario",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"usuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LOGIN",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"admin@gmail.com\",\n    \"senha\":\"123456\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verificar Token",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/usuario/verificar-token",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"usuario",
+								"verificar-token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Trocar Senha",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"senhaAtual\": \"654321\",\n    \"novaSenha\":\"123456\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/usuario/senha/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"usuario",
+								"senha",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Usuarios",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/usuario",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"usuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Por Email",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/usuario/email/:email",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"usuario",
+								"email",
+								":email"
+							],
+							"variable": [
+								{
+									"key": "email",
+									"value": "admin@gmail.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Usuario por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/usuario/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"usuario",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Usuario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Codinhoto\",\n    \"email\": \"admin@gmail.com\",\n    \"senha\":\"123456\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/usuario/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"usuario",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar Usuario",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/usuario/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"usuario",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Curso",
+			"item": [
+				{
+					"name": "Listar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/curso",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"curso"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Por Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/curso/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"curso",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Engenharia de Software\",\n    \"habilitacao\": \"Engenharia de Computação\",\n    \"nivel\": \"Superior\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/curso",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"curso"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alterar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Engenharia de Computação\",\n    \"habilitacao\": \"Bacharelado\",\n    \"nivel\": \"Superior\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/curso/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"curso",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/curso/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"curso",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Aluno",
+			"item": [
+				{
+					"name": "Listar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/aluno",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"aluno"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Por Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/aluno/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"aluno",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"João da Silva\",\n    \"rg\": \"1234567\",\n    \"cpf\": \"123.456.789-00\",\n    \"endereco\": \"Rua Exemplo, 123\",\n    \"cidadeId\": 1,\n    \"cursoId\": 4,\n    \"serie\": \"3º Ano\",\n    \"telefone\": \"(11) 99999-9999\",\n    \"telefonePai\": \"(11) 98888-8888\",\n    \"email\": \"joao@email.com\",\n    \"dataNascimento\": \"2000-01-01T00:00:00.000Z\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/aluno",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"aluno"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alterar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"João da Silva Atualizado\",\n    \"rg\": \"7654321\",\n    \"cpf\": \"123.456.789-00\",\n    \"endereco\": \"Rua Nova, 456\",\n    \"cidadeId\": 1,\n    \"cursoId\": 2,\n    \"serie\": \"2º Ano\",\n    \"telefone\": \"(11) 97777-7777\",\n    \"telefonePai\": \"(11) 96666-6666\",\n    \"email\": \"joao.novo@email.com\",\n    \"dataNascimento\": \"2001-01-01T00:00:00.000Z\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/aluno/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"aluno",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/aluno/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"aluno",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Empresa",
+			"item": [
+				{
+					"name": "Listar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/empresa",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"empresa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Por Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/empresa/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"empresa",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"Empresa XPTO\",\n  \"nomeFantasia\": \"XPTO Soluções\",\n  \"cnpj\": \"00.000.000/0001-00\",\n  \"cpfAutonomo\": \"123.456.789-00\",\n  \"numClassAutonomo\": \"1234567\",\n  \"endereco\": \"Rua das Inovações, 123 - Centro\",\n  \"cidadeId\": 1,\n  \"telefone1\": \"(11) 91234-5678\",\n  \"telefone2\": \"(11) 93456-7890\",\n  \"email\": \"contato@xpto.com.br\",\n  \"representante\": \"João da Silva\",\n  \"cargoRepresentante\": \"Diretor Executivo\"\n}\n"
+						},
+						"url": {
+							"raw": "{{URL}}/empresa",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"empresa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alterar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"Empresa XPTO Ltda\",\n  \"nomeFantasia\": \"XPTO Tech\",\n  \"cnpj\": \"11.222.333/0001-44\",\n  \"cpfAutonomo\": \"987.654.321-00\",\n  \"numClassAutonomo\": \"7654321\",\n  \"endereco\": \"Av. da Tecnologia, 500 - Bairro Industrial\",\n  \"cidadeId\": 2,\n  \"telefone1\": \"(21) 99876-5432\",\n  \"telefone2\": \"(21) 98765-4321\",\n  \"email\": \"empresa@xptotech.com\",\n  \"representante\": \"Maria Oliveira\",\n  \"cargoRepresentante\": \"CEO\"\n}\n"
+						},
+						"url": {
+							"raw": "{{URL}}/empresa/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"empresa",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/empresa/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"empresa",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Estagio",
+			"item": [
+				{
+					"name": "Listar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/estagio",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"estagio"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Por Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/estagio/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"estagio",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"alunoId\": 1,\n    \"empresaId\": 1,\n    \"cursoId\": 1,\n    \"instituicaoId\": 1,\n    \"tipo\": \"Obrigatório\",\n    \"remunerado\": true,\n    \"dataInicio\": \"2024-07-01\",\n    \"dataTermino\": \"2024-12-01\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/estagio",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"estagio"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alterar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"alunoId\": 1,\n    \"empresaId\": 1,\n    \"cursoId\": 1,\n    \"instituicaoId\": 1,\n    \"tipo\": \"Não Obrigatório\",\n    \"remunerado\": false,\n    \"dataInicio\": \"2024-07-01\",\n    \"dataTermino\": \"2024-12-01\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/estagio/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"estagio",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/estagio/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"estagio",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "MotivoEncerramentoEstagio",
+			"item": [
+				{
+					"name": "Criar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"estagioId\": 1,\n    \"motivoPrincipal\": \"Conclusão do curso\",\n    \"motivoPrincipalOutros\": \"\",\n    \"motivosEmpresa\": \"Projeto finalizado\",\n    \"motivosEmpresaOutros\": \"\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/motivo-encerramento-estagio",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"motivo-encerramento-estagio"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/motivo-encerramento-estagio",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"motivo-encerramento-estagio"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Por Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/motivo-encerramento-estagio/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"motivo-encerramento-estagio",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Por EstagioId",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/motivo-encerramento-estagio/estagio/:estagioId",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"motivo-encerramento-estagio",
+								"estagio",
+								":estagioId"
+							],
+							"variable": [
+								{
+									"key": "estagioId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"estagioId\": 1,\n    \"motivoPrincipal\": \"Cancelamento pelo aluno\",\n    \"motivoPrincipalOutros\": \"\",\n    \"motivosEmpresa\": \"Demissão\",\n    \"motivosEmpresaOutros\": \"\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/motivo-encerramento-estagio/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"motivo-encerramento-estagio",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/motivo-encerramento-estagio/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"motivo-encerramento-estagio",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "URL",
+			"value": "http://localhost:3000",
+			"type": "default"
+		},
+		{
+			"key": "ID",
+			"value": "1",
+			"type": "default"
+		},
+		{
+			"key": "nome",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "uf",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "base_url",
+			"value": "http://localhost:3000",
+			"type": "default"
+		}
+	]
+}

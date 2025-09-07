@@ -1,0 +1,77 @@
+---
+description: Validações obrigatórias e segurança (hash, timestamps, input)
+alwaysApply: true
+globs: src/**/*.{ts,tsx}
+---
+
+## 🛡️ VALIDAÇÕES OBRIGATÓRIAS
+
+### 1) Validação de Email
+```ts
+export function validateEmailFormat(email: string): string[] {
+  const errors: string[] = [];
+  if (!email) {
+    errors.push("E-mail é obrigatório");
+    return errors;
+  }
+  // regex robusta para formato de e-mail
+  return errors;
+}
+```
+
+### 2) Validação de ID
+```ts
+export function validateUserId(params: any): string[] {
+  const errors: string[] = [];
+  if (!params.id) errors.push("ID é obrigatório");
+  else if (isNaN(Number(params.id))) errors.push("ID deve ser um número");
+  else if (Number(params.id) <= 0) errors.push("ID deve ser um número positivo");
+  return errors;
+}
+```
+
+### 3) Validação de Paginação
+```ts
+export function validatePaginationQuery(query: any): string[] {
+  const errors: string[] = [];
+  if (query.page !== undefined) {
+    const pageNum = Number(query.page);
+    if (isNaN(pageNum) || !Number.isInteger(pageNum) || pageNum < 1) {
+      errors.push("Page deve ser um número inteiro positivo");
+    }
+  }
+  return errors;
+}
+```
+
+## 🔐 SEGURANÇA
+
+### Hash de Senhas (SEMPRE)
+```ts
+import { hashPassword } from '../../shared/utils/Hash';
+async createUser(user: UserRequestDTO): Promise<UserResponseDTO> {
+  user.password = await hashPassword(user.password);
+  // ...
+}
+```
+
+### Timestamps Automáticos (Prisma)
+```prisma
+model User {
+  id        Int      @id @default(autoincrement())
+  // outros campos...
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+```
+
+### Validação de Dados (exemplo CreateUser)
+```ts
+export function validateCreateUser(data: any): string[] {
+  const errors: string[] = [];
+  if (!data.name || data.name.length < 2) {
+    errors.push("Nome deve ter pelo menos 2 caracteres");
+  }
+  return errors;
+}
+```

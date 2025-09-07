@@ -1,0 +1,42 @@
+---
+description: Padrão de paginação (interfaces + repository)
+alwaysApply: true
+globs: src/**/*.{ts,tsx}
+---
+
+## 📊 PAGINAÇÃO OBRIGATÓRIA
+
+### Interface
+```ts
+interface PaginationResponse<T> {
+  data: T[];
+  pagination: {
+    page: number;
+    limit: number;
+    total: number;
+    totalPages: number;
+    hasNext: boolean;
+    hasPrev: boolean;
+  };
+}
+```
+
+### Implementação no Repository
+```ts
+async listUsersPaginated(query: PaginationQuery): Promise<PaginationResponse<UserModel>> {
+  const page = query.page || 1;
+  const limit = query.limit || 10;
+  const skip = (page - 1) * limit;
+
+  const [users, total] = await Promise.all([
+    prisma.user.findMany({ where, skip, take: limit, orderBy: { createdAt: 'desc' } }),
+    prisma.user.count({ where })
+  ]);
+
+  const totalPages = Math.ceil(total / limit);
+  return {
+    data: users.map(user => UserModel.prismaToModel(user)),
+    pagination: { page, limit, total, totalPages, hasNext: page < totalPages, hasPrev: page > 1 }
+  };
+}
+```

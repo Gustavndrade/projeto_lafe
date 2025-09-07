@@ -1,0 +1,482 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+//// ===== Enums =====
+enum Role {
+    admin
+    user
+}
+
+enum Gender {
+    M
+    F
+    OTHER
+}
+
+enum TeamStatus {
+    active
+    inactive
+    suspended
+}
+
+enum TournamentStatus {
+    draft
+    open_registration
+    registration_closed
+    in_progress
+    finished
+    cancelled
+}
+
+enum MatchStatus {
+    scheduled
+    in_progress
+    finished
+    walkover
+}
+
+//// ===== Usuário =====
+model User {
+    id        Int       @id @default(autoincrement())
+    email     String    @unique
+    name      String
+    password  String
+    role      Role      @default(user)
+    isActive  Boolean   @default(true)
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
+    deletedAt DateTime?
+
+    // Relações de auditoria
+    createdCourses     Course[]     @relation("CourseCreatedBy")
+    updatedCourses     Course[]     @relation("CourseUpdatedBy")
+    createdPlayers     Player[]     @relation("PlayerCreatedBy")
+    updatedPlayers     Player[]     @relation("PlayerUpdatedBy")
+    createdTeams       Team[]       @relation("TeamCreatedBy")
+    updatedTeams       Team[]       @relation("TeamUpdatedBy")
+    createdTournaments Tournament[] @relation("TournamentCreatedBy")
+    updatedTournaments Tournament[] @relation("TournamentUpdatedBy")
+    createdMatches     Match[]      @relation("MatchCreatedBy")
+    updatedMatches     Match[]      @relation("MatchUpdatedBy")
+
+    @@index([email])
+    @@index([role])
+    @@index([isActive])
+    @@index([createdAt])
+}
+
+//// ===== Curso (ex: ADS, Enfermagem) =====
+model Course {
+    id          Int       @id @default(autoincrement())
+    name        String    @unique
+    code        String    @unique // código do curso (ex: "ADS", "ENF")
+    description String?
+    isActive    Boolean   @default(true)
+    createdAt   DateTime  @default(now())
+    updatedAt   DateTime  @updatedAt
+    deletedAt   DateTime?
+
+    // Auditoria
+    createdBy     Int?
+    updatedBy     Int?
+    createdByUser User? @relation("CourseCreatedBy", fields: [createdBy], references: [id])
+    updatedByUser User? @relation("CourseUpdatedBy", fields: [updatedBy], references: [id])
+
+    teams   Team[]
+    players Player[]
+
+    @@index([code])
+    @@index([isActive])
+    @@index([createdAt])
+}
+
+//// ===== Jogador =====
+model Player {
+    id        Int       @id @default(autoincrement())
+    name      String
+    rm        String    @unique // registro do aluno
+    email     String?   @unique
+    phone     String?
+    gender    Gender?
+    isActive  Boolean   @default(true)
+    courseId  Int
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
+    deletedAt DateTime?
+
+    // Auditoria
+    createdBy     Int?
+    updatedBy     Int?
+    createdByUser User? @relation("PlayerCreatedBy", fields: [createdBy], references: [id])
+    updatedByUser User? @relation("PlayerUpdatedBy", fields: [updatedBy], references: [id])
+
+    course      Course       @relation(fields: [courseId], references: [id])
+    playerTeams PlayerTeam[]
+
+    @@index([rm])
+    @@index([email])
+    @@index([courseId])
+    @@index([isActive])
+    @@index([createdAt])
+}
+
+//// ===== Time =====
+model Team {
+    id          Int        @id @default(autoincrement())
+    name        String
+    description String?
+    status      TeamStatus @default(active)
+    courseId    Int
+    createdAt   DateTime   @default(now())
+    updatedAt   DateTime   @updatedAt
+    deletedAt   DateTime?
+
+    // Auditoria
+    createdBy     Int?
+    updatedBy     Int?
+    createdByUser User? @relation("TeamCreatedBy", fields: [createdBy], references: [id])
+    updatedByUser User? @relation("TeamUpdatedBy", fields: [updatedBy], references: [id])
+
+    course Course @relation(fields: [courseId], references: [id])
+
+    // jogadores (N:N)
+    playerTeams PlayerTeam[]
+
+    // participações em torneios
+    entries TournamentEntry[]
+
+    // partidas
+    matchesA Match[] @relation("teamA")
+    matchesB Match[] @relation("teamB")
+    wins     Match[] @relation("winner")
+
+    // bracket participants
+    bracketParticipants BracketParticipant[]
+
+    @@index([courseId])
+    @@index([status])
+    @@index([createdAt])
+}
+
+//// ===== N:N Jogador x Time =====
+model PlayerTeam {
+    id        Int       @id @default(autoincrement())
+    playerId  Int
+    teamId    Int
+    isActive  Boolean   @default(true)
+    joinedAt  DateTime  @default(now())
+    leftAt    DateTime?
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
+
+    player Player @relation(fields: [playerId], references: [id])
+    team   Team   @relation(fields: [teamId], references: [id])
+
+    @@unique([playerId, teamId])
+    @@index([playerId])
+    @@index([teamId])
+    @@index([isActive])
+}
+
+//// ===== Torneio =====
+model Tournament {
+    id          Int              @id @default(autoincrement())
+    name        String
+    description String?
+    year        Int
+    status      TournamentStatus @default(draft)
+    bestOfSets  Int              @default(5) // 3 ou 5 sets (MD3/MD5)
+    maxTeams    Int?
+    startDate   DateTime?
+    endDate     DateTime?
+    createdAt   DateTime         @default(now())
+    updatedAt   DateTime         @updatedAt
+    deletedAt   DateTime?
+
+    // Auditoria
+    createdBy     Int?
+    updatedBy     Int?
+    createdByUser User? @relation("TournamentCreatedBy", fields: [createdBy], references: [id])
+    updatedByUser User? @relation("TournamentUpdatedBy", fields: [updatedBy], references: [id])
+
+    entries TournamentEntry[]
+    matches Match[]
+    stages  BracketStage[]
+
+    @@index([year])
+    @@index([status])
+    @@index([startDate])
+    @@index([createdAt])
+}
+
+//// ===== Inscrição de Time no Torneio =====
+model TournamentEntry {
+    id           Int      @id @default(autoincrement())
+    tournamentId Int
+    teamId       Int
+    registeredAt DateTime @default(now())
+    createdAt    DateTime @default(now())
+    updatedAt    DateTime @updatedAt
+
+    tournament Tournament @relation(fields: [tournamentId], references: [id])
+    team       Team       @relation(fields: [teamId], references: [id])
+
+    @@unique([tournamentId, teamId])
+    @@index([tournamentId])
+    @@index([teamId])
+    @@index([registeredAt])
+}
+
+//// ===== Partida =====
+model Match {
+    id           Int        @id @default(autoincrement())
+    tournamentId Int
+    tournament   Tournament @relation(fields: [tournamentId], references: [id])
+
+    teamAId Int?
+    teamA   Team? @relation("teamA", fields: [teamAId], references: [id])
+    teamBId Int?
+    teamB   Team? @relation("teamB", fields: [teamBId], references: [id])
+
+    status       MatchStatus @default(scheduled)
+    setsWonA     Int         @default(0)
+    setsWonB     Int         @default(0)
+    setsToWin    Int
+    winnerTeamId Int?
+    winnerTeam   Team?       @relation("winner", fields: [winnerTeamId], references: [id])
+
+    scheduledAt DateTime?
+    startedAt   DateTime?
+    finishedAt  DateTime?
+    location    String?
+    referee     String?
+    notes       String?
+    createdAt   DateTime  @default(now())
+    updatedAt   DateTime  @updatedAt
+
+    // Auditoria
+    createdBy     Int?
+    updatedBy     Int?
+    createdByUser User? @relation("MatchCreatedBy", fields: [createdBy], references: [id])
+    updatedByUser User? @relation("MatchUpdatedBy", fields: [updatedBy], references: [id])
+
+    sets Set[]
+
+    @@index([tournamentId])
+    @@index([status])
+    @@index([scheduledAt])
+    @@index([createdAt])
+}
+
+//// ===== Set da Partida =====
+model Set {
+    id         Int       @id @default(autoincrement())
+    matchId    Int
+    number     Int // Set 1, 2, 3...
+    isTieBreak Boolean   @default(false)
+    pointsA    Int       @default(0)
+    pointsB    Int       @default(0)
+    finished   Boolean   @default(false)
+    startedAt  DateTime?
+    finishedAt DateTime?
+    createdAt  DateTime  @default(now())
+    updatedAt  DateTime  @updatedAt
+
+    match Match @relation(fields: [matchId], references: [id])
+
+    @@unique([matchId, number])
+    @@index([matchId])
+    @@index([finished])
+}
+
+/// ===============================
+/// BRACKETS CORE (compatível c/ manager)
+/// ===============================
+
+enum BracketType {
+    single_elimination
+    double_elimination
+    round_robin
+}
+
+enum BracketMatchStatus {
+    pending // ainda sem dois oponentes
+    scheduled
+    in_progress
+    finished
+    walkover
+}
+
+/// Stage = "uma chave" dentro do torneio (geralmente 1 para single-elim)
+model BracketStage {
+    id            Int         @id @default(autoincrement())
+    tournamentId  Int // liga na sua tabela Tournament
+    name          String
+    type          BracketType @default(single_elimination)
+    seedingMethod String? // "random" | "manual"
+    settingsJson  Json? // regras/ajustes do manager (opcional)
+    createdAt     DateTime    @default(now())
+    updatedAt     DateTime    @updatedAt
+
+    // relações
+    tournament   Tournament                @relation(fields: [tournamentId], references: [id])
+    groups       BracketGroup[]
+    rounds       BracketRound[]
+    matches      BracketMatch[]
+    participants BracketStageParticipant[]
+
+    @@index([tournamentId])
+    @@index([createdAt])
+}
+
+/// Group = normalmente 1 (pode ter mais, se a stage tiver grupos)
+model BracketGroup {
+    id        Int      @id @default(autoincrement())
+    stageId   Int
+    number    Int // 1..N
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    stage   BracketStage   @relation(fields: [stageId], references: [id])
+    rounds  BracketRound[]
+    matches BracketMatch[]
+
+    @@unique([stageId, number])
+    @@index([stageId])
+}
+
+/// Round = rodada da chave (1 = primeira, 2 = quartas, 3 = semi, ...)
+model BracketRound {
+    id        Int      @id @default(autoincrement())
+    stageId   Int
+    groupId   Int
+    number    Int // 1..N dentro do grupo
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    stage   BracketStage   @relation(fields: [stageId], references: [id])
+    group   BracketGroup   @relation(fields: [groupId], references: [id])
+    matches BracketMatch[]
+
+    @@unique([stageId, groupId, number])
+    @@index([stageId])
+    @@index([groupId])
+}
+
+/// Participant = participante "genérico" da stage (ligado ao seu Team)
+model BracketParticipant {
+    id        Int      @id @default(autoincrement())
+    name      String
+    teamId    Int? // referência opcional ao seu Team (recomendado)
+    metaJson  Json? // qualquer dado adicional
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    team     Team?                     @relation(fields: [teamId], references: [id])
+    stages   BracketStageParticipant[]
+    asA      BracketMatch[]            @relation("participantA")
+    asB      BracketMatch[]            @relation("participantB")
+    asWinner BracketMatch[]            @relation("winnerPart")
+
+    @@index([teamId])
+    @@index([createdAt])
+}
+
+/// Ligação da Stage com os Participants (guarda seed/posição)
+model BracketStageParticipant {
+    id            Int      @id @default(autoincrement())
+    stageId       Int
+    participantId Int
+    seed          Int? // cabeça de chave/posição inicial
+    createdAt     DateTime @default(now())
+    updatedAt     DateTime @updatedAt
+
+    stage       BracketStage       @relation(fields: [stageId], references: [id])
+    participant BracketParticipant @relation(fields: [participantId], references: [id])
+
+    @@unique([stageId, participantId])
+    @@index([stageId, seed])
+    @@index([stageId])
+    @@index([participantId])
+}
+
+/// Match = partida do chaveamento (a própria "casa" do diagrama)
+model BracketMatch {
+    id      Int                @id @default(autoincrement())
+    stageId Int
+    groupId Int
+    roundId Int
+    number  Int // ordem dentro do round (1..N)
+    status  BracketMatchStatus @default(pending)
+
+    // oponentes (participants) — preenchidos pelo manager conforme avanço
+    participantAId Int?
+    participantBId Int?
+    scoreA         Int? // agregado (útil p/ esportes por pontos)
+    scoreB         Int?
+
+    // encadeamento (para onde o vencedor vai)
+    childMatchId  Int? // próxima partida
+    childPosition Int? // 1 = lado A do filho, 2 = lado B do filho
+
+    // vencedor
+    winnerParticipantId Int?
+
+    scheduledAt DateTime?
+    startedAt   DateTime?
+    finishedAt  DateTime?
+    location    String?
+    referee     String?
+    metaJson    Json? // livre (ex.: árbitro, observações)
+    createdAt   DateTime  @default(now())
+    updatedAt   DateTime  @updatedAt
+
+    // relações
+    stage BracketStage @relation(fields: [stageId], references: [id])
+    group BracketGroup @relation(fields: [groupId], references: [id])
+    round BracketRound @relation(fields: [roundId], references: [id])
+
+    participantA BracketParticipant? @relation("participantA", fields: [participantAId], references: [id])
+    participantB BracketParticipant? @relation("participantB", fields: [participantBId], references: [id])
+    winnerPart   BracketParticipant? @relation("winnerPart", fields: [winnerParticipantId], references: [id])
+
+    childMatch BracketMatch?  @relation("NextBracket", fields: [childMatchId], references: [id])
+    previous   BracketMatch[] @relation("NextBracket")
+
+    games BracketMatchGame[]
+
+    @@unique([stageId, groupId, roundId, number])
+    @@index([stageId, groupId, roundId])
+    @@index([childMatchId])
+    @@index([status])
+    @@index([scheduledAt])
+    @@index([createdAt])
+}
+
+/// MatchGame = "subjogo" da partida (no vôlei = um Set)
+model BracketMatchGame {
+    id         Int       @id @default(autoincrement())
+    matchId    Int
+    number     Int // 1..N (Set 1, Set 2, ...)
+    isTieBreak Boolean   @default(false)
+    pointsA    Int       @default(0)
+    pointsB    Int       @default(0)
+    finished   Boolean   @default(false)
+    startedAt  DateTime?
+    finishedAt DateTime?
+    metaJson   Json?
+    createdAt  DateTime  @default(now())
+    updatedAt  DateTime  @updatedAt
+
+    match BracketMatch @relation(fields: [matchId], references: [id])
+
+    @@unique([matchId, number])
+    @@index([matchId])
+    @@index([finished])
+}

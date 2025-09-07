@@ -1,0 +1,62 @@
+---
+description: Padrões de código para Controller, Service e Repository
+alwaysApply: true
+globs: src/**/*.{ts,tsx}
+---
+
+## 🔧 PADRÕES DE CÓDIGO
+
+### Controller (HTTP Layer) — CORRETO
+```ts
+async createUser(req: Request, res: Response, next: NextFunction): Promise<any> {
+  try {
+    const user = await this.userService.createUser(req.body);
+    return res.status(201).json(user);
+  } catch (error) {
+    next(error);
+  }
+}
+```
+
+### Controller — ERRADO
+```ts
+async createUser(req: Request, res: Response): Promise<any> {
+  const user = await this.userService.createUser(req.body);
+  return res.status(201).json(user);
+}
+```
+
+### Service (Regra de Negócio) — CORRETO
+```ts
+async createUser(user: UserRequestDTO): Promise<UserResponseDTO> {
+  user.password = await hashPassword(user.password);
+  const userResponse = await this.userRepository.createUser(user);
+  return userResponse.toResponse();
+}
+```
+
+### Service — ERRADO (validação aqui é proibida)
+```ts
+async createUser(user: UserRequestDTO): Promise<UserResponseDTO> {
+  if (!user.name) throw new Error("Nome obrigatório");
+  return await this.userRepository.createUser(user);
+}
+```
+
+### Repository (Acesso a Dados) — CORRETO
+```ts
+async createUser(user: UserRequestDTO): Promise<UserModel> {
+  const emailFound = await prisma.user.findUnique({ where: { email: user.email } });
+  if (emailFound) throw new AppError("E-mail já cadastrado", 400);
+
+  const createdUser = await prisma.user.create({ data: user.dataToPrisma() });
+  return UserModel.prismaToModel(createdUser);
+}
+```
+
+### Repository — ERRADO
+```ts
+async createUser(user: UserRequestDTO): Promise<UserModel> {
+  return await prisma.user.create({ data: user });
+}
+```
