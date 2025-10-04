@@ -75,7 +75,6 @@ model User {
 model Course {
     id          Int       @id @default(autoincrement())
     name        String    @unique
-    code        String    @unique // código do curso (ex: "ADS", "ENF")
     description String?
     isActive    Boolean   @default(true)
     createdAt   DateTime  @default(now())
